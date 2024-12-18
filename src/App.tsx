@@ -3,12 +3,13 @@ import Sidebar from "./components/Sidebar";
 import Table from "./components/Table";
 
 function App() {
-  let heading = ["Subtask", "Ritual", "Priority", "Start", "Due"];
+  let heading = ["Subtask", "Ritual", "Priority", "State", "Start", "Due"];
   let items = [
     {
       name: "Collect 5 Bramblesnout",
       ritual: "Summon Kranklemaw",
       priority: 3,
+      state: 3,
       start: "Night of the Bloodcresent",
       end: "On the Morrow",
     },
@@ -16,6 +17,7 @@ function App() {
       name: "Collect 7 Yawberries",
       ritual: "Curse of Rot",
       priority: 2,
+      state: 4,
       start: "Sumpter Eve",
       end: "Come Brightlight",
     },
@@ -23,6 +25,7 @@ function App() {
       name: "Draw Krat Circles",
       ritual: "Summon Kranklemaw",
       priority: 3,
+      state: 2,
       start: "Night of the Bloodcresent",
       end: "On the Morrow",
     },

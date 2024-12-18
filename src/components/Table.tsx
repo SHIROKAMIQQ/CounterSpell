@@ -2,6 +2,7 @@ export interface Subtask {
   name: string;
   ritual: string;
   priority: number;
+  state: number;
   start: string;
   end: string;
 }
@@ -29,6 +30,7 @@ const Table = ({ items, heading }: Props) => {
             <td>{item.name}</td>
             <td>{item.ritual}</td>
             <td>{item.priority}</td>
+            <td>{item.state}</td>
             <td>{item.start}</td>
             <td>{item.end}</td>
           </tr>
