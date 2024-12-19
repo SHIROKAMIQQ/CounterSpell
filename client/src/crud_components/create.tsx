@@ -227,11 +227,9 @@ function Create(props: Props) {
           </div>
           <div className="form-group my-3">
             <button
-              className="close-btn btn btn-danger"
+              className="close-btn btn-close"
               onClick={() => props.setTrigger(false)}
-            >
-              Close
-            </button>
+            />
             <button type="submit" className="btn btn-success">
               Save
             </button>
