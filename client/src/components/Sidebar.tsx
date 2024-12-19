@@ -1,14 +1,22 @@
 import { useState, useEffect } from "react";
+import * as Icon from "react-bootstrap-icons";
+
 
 import Create from "../crud_components/create";
 
 export interface Sidebar_Props {
   refresh: boolean;
   setRefresh: CallableFunction;
+  searchInput: string;
+  setSearchInput: CallableFunction;
 }
 
 function Sidebar(props: Sidebar_Props) {
   const [add_subtask_popup, set_popup] = useState(false);
+
+  useEffect(() => {
+    props.setRefresh(!props.refresh);
+  }, [props.searchInput]);
 
   useEffect(() => {
     props.setRefresh(!props.refresh);
@@ -20,7 +28,14 @@ function Sidebar(props: Sidebar_Props) {
       <h2 className="py-2">Tools</h2>
       <hr className="my-0" />
       <ul className="nav nav-pills flex-column mb-auto">
-        <li className="nav-item p-3">Search</li>
+        <li className="nav-item p-3">
+          <Icon.Search />
+          <input 
+            placeholder = "Search subtask"
+            value = {props.searchInput}
+            onChange = {(e) => props.setSearchInput(e.target.value)}
+          />
+        </li>
         <li className="nav-item py-1">
           <button
             id="add_subtask_btn"
