@@ -8,9 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "back_test": "echo \"Error: no test specified\" && exit 1",
-    "back_start": " node ./back/server.cjs",
-    "back_dev": "nodemon ./back/server.cjs"
+    "server_test": "echo \"Error: no test specified\" && exit 1",
+    "server_start": "node ./server/server.cjs",
+    "server_dev": "nodemon ./server/server.cjs"
   },
   "dependencies": {
     "axios": "^1.7.9",
