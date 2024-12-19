@@ -1,7 +1,7 @@
 //import axios from 'axios'
 //import {useState, useEffect} from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import * as Icon from 'react-bootstrap-icons'
+import "bootstrap/dist/css/bootstrap.min.css";
+import * as Icon from "react-bootstrap-icons";
 
 export interface Subtask {
   subtask_id: number;
@@ -20,25 +20,35 @@ export interface Table_Props {
   setRefresh: CallableFunction;
 }
 
-
 function getState(i: number) {
-  switch(i){
-    case 0: return "Backlog";
-    case 1: return "To Do";
-    case 2: return "In Progress"
-    case 3: return "Done";
-    case 4: return "Cancelled";
-    case 5: return "On Hold";
+  switch (i) {
+    case 0:
+      return "Backlog";
+    case 1:
+      return "To Do";
+    case 2:
+      return "In Progress";
+    case 3:
+      return "Done";
+    case 4:
+      return "Cancelled";
+    case 5:
+      return "On Hold";
   }
 }
 
-function getPriority(i: number){
-  switch(i){
-    case 0: return "None";
-    case 1: return "Low";
-    case 2: return "Medium";
-    case 3: return "High";
-    case 4: return "Urgent";
+function getPriority(i: number) {
+  switch (i) {
+    case 0:
+      return "None";
+    case 1:
+      return "Low";
+    case 2:
+      return "Medium";
+    case 3:
+      return "High";
+    case 4:
+      return "Urgent";
   }
 }
 
@@ -59,7 +69,7 @@ function Table(props: Table_Props) {
       </thead>
       <tbody>
         {data.map((subtask: Subtask) => (
-          <tr key = {subtask.subtask_id}>
+          <tr key={subtask.subtask_id}>
             <td>{subtask.subtask_name}</td>
             <td>{subtask.ritual_name}</td>
             <td>{getState(subtask.subtask_priority)}</td>
@@ -85,6 +95,15 @@ function Table(props: Table_Props) {
           </tr>
         ))}
       </tbody>
+      {data.length === 0 && (
+        <tfoot>
+          <tr>
+            <td colSpan={7} className="text-center text-secondary-emphasis">
+              HEE! HEE! HEE! All tasks are done, Happy Cursing!
+            </td>
+          </tr>
+        </tfoot>
+      )}
     </table>
   );
 }
