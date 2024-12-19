@@ -20,6 +20,7 @@ export interface Table_Props {
   setRefresh: CallableFunction;
 }
 
+
 function getState(i: number) {
   switch(i){
     case 0: return "Backlog";
@@ -47,13 +48,13 @@ function Table(props: Table_Props) {
     <table className="table table-striped table-dark">
       <thead>
         <tr>
-          <th scope = "col">Subtask</th>
-          <th scope = "col">Ritual</th>
-          <th scope = "col">State</th>
-          <th scope = "col">Priority</th>
-          <th scope = "col">Start</th>
-          <th scope = "col">Deadline</th>
-          <th scope = "col"> </th>
+          <th scope="col">Subtask</th>
+          <th scope="col">Ritual</th>
+          <th scope="col">State</th>
+          <th scope="col">Priority</th>
+          <th scope="col">Start</th>
+          <th scope="col">Deadline</th>
+          <th scope="col"> </th>
         </tr>
       </thead>
       <tbody>
@@ -66,14 +67,26 @@ function Table(props: Table_Props) {
             <td>{subtask.subtask_startdate}</td>
             <td>{subtask.subtask_deadline}</td>
             <td>
-              <button name = "edit_btn" title = " Edit" className = "btn btn-outline-warning"><Icon.Shadows /></button>
-              <button name = "delete_btn" title = "Delete" className = "btn btn-outline-danger"><Icon.XDiamondFill /></button>
+              <button
+                name="edit_btn"
+                title=" Edit"
+                className="btn btn-outline-warning"
+              >
+                <Icon.Shadows />
+              </button>
+              <button
+                name="delete_btn"
+                title="Delete"
+                className="btn btn-outline-danger"
+              >
+                <Icon.XDiamondFill />
+              </button>
             </td>
           </tr>
         ))}
       </tbody>
     </table>
   );
-};
+}
 
 export default Table;

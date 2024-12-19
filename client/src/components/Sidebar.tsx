@@ -16,9 +16,9 @@ function Sidebar(props: Sidebar_Props) {
   }, [add_subtask_popup]);
 
   return (
-    <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-      <h1>Sidebar</h1>
-      <hr />
+    <div className="d-flex flex-column px-3 pt-2 text-white min-vh-100">
+      <h2 className="py-2">Tools</h2>
+      <hr className="my-0" />
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item p-3">
           Search</li>
