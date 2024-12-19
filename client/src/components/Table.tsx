@@ -1,38 +1,47 @@
-export interface Subtask {
-  name: string;
-  ritual: string;
-  priority: number;
-  state: number;
-  start: string;
-  end: string;
-}
+import axios from 'axios'
+import {useState, useEffect} from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import * as Icon from 'react-bootstrap-icons'
 
-interface Props {
-  items: Subtask[];
-  heading: string[];
-}
+function Table() {
+  const [data, setData] = useState([])
 
-const Table = ({ items, heading }: Props) => {
+  useEffect(() => {
+    axios.get('http://localhost:3000/fetch_subtasks')
+    .then((res) => {
+        setData(res.data)
+        console.log("FETCHED")
+        console.log(data)
+    })
+    .catch((err) => console.log(err))
+  }, [])
+
   return (
     <table className="table table-striped table-dark">
       <thead>
         <tr>
-          {heading.map((item, index) => (
-            <th scope="col" key={index + item}>
-              {item}
-            </th>
-          ))}
+          <th scope = "col">Subtask</th>
+          <th scope = "col">Ritual</th>
+          <th scope = "col">State</th>
+          <th scope = "col">Priority</th>
+          <th scope = "col">Start</th>
+          <th scope = "col">Deadline</th>
+          <th scope = "col"> </th>
         </tr>
       </thead>
       <tbody>
-        {items.map((item, index) => (
-          <tr key={index + item.name}>
-            <td>{item.name}</td>
-            <td>{item.ritual}</td>
-            <td>{item.priority}</td>
-            <td>{item.state}</td>
-            <td>{item.start}</td>
-            <td>{item.end}</td>
+        {data.map((subtask) => (
+          <tr key = {subtask.subtask_id}>
+            <td>{subtask.subtask_name}</td>
+            <td>{subtask.ritual_name}</td>
+            <td>{subtask.subtask_state}</td>
+            <td>{subtask.subtask_priority}</td>
+            <td>{subtask.subtask_startdate}</td>
+            <td>{subtask.subtask_deadline}</td>
+            <td>
+              <button name = "edit_btn" title = " Edit" className = "btn btn-outline-warning"><Icon.Shadows /></button>
+              <button name = "delete_btn" title = "Delete" className = "btn btn-outline-danger"><Icon.XDiamondFill /></button>
+            </td>
           </tr>
         ))}
       </tbody>

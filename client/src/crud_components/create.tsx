@@ -1,14 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 import "./create.css";
 
-interface Props {
-  trigger: boolean;
-  setTrigger: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function Create({ trigger, setTrigger }: Props) {
+function Create(props) {
   const [values, setValues] = useState({
     subtask_name: "",
     ritual_name: "",
@@ -20,16 +15,16 @@ function Create({ trigger, setTrigger }: Props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    props.setTrigger(false);
     axios
-      .post("/add_subtask", values)
+      .post("http://localhost:3000/add_subtask", values)
       .then((res) => {
         console.log(res);
       })
       .catch((err) => console.log(err));
   }
 
-  return trigger ? (
+  return props.trigger ? (
     <div className="create_popup container">
       <div className="create_popup_inner row">
         <h3>Create New Subtask</h3>
@@ -108,7 +103,9 @@ function Create({ trigger, setTrigger }: Props) {
                 setValues({ ...values, subtask_state: e.target.value })
               }
             />
-            <label htmlFor="inprogress_radio">In Progress</label>
+            <label htmlFor="inprogress_radio" name="subtask_state" value="3">
+              In Progress
+            </label>
             <input
               type="radio"
               id="done_radio"
@@ -195,7 +192,10 @@ function Create({ trigger, setTrigger }: Props) {
             <label htmlFor="urgent_radio">Urgent</label>
           </div>
           <div className="form-group my-3">
-            <button className="close-btn" onClick={() => setTrigger(false)}>
+            <button
+              className="close-btn"
+              onClick={() => props.setTrigger(false)}
+            >
               Close
             </button>
             <button type="submit" className="btn btn-success">

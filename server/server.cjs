@@ -59,6 +59,17 @@ app.post('/add_subtask', (req, res) => {
         
 });
 
+app.get('/fetch_subtasks', (req, res) => {
+    var fetch_subtasks_query = "SELECT subtask_id, subtask_name, ritual_name, subtask_state, subtask_priority, subtask_startdate, subtask_deadline FROM subtasks_table";
+    db.query(fetch_subtasks_query, (fetch_err, fetch_res) => {
+        if (fetch_err) {
+            console.log("Error fetching subtasks " + fetch_err);
+            return res.json({message: "Error fetching subtasks"});
+        }
+        console.log(fetch_res);
+        return res.json(fetch_res);
+    });
+});
 
 app.listen(port, ()=>{
     console.log('listening')
