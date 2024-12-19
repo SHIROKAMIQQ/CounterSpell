@@ -1,21 +1,48 @@
-import axios from 'axios'
-import {useState, useEffect} from 'react'
+//import axios from 'axios'
+//import {useState, useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import * as Icon from 'react-bootstrap-icons'
 
-function Table() {
-  const [data, setData] = useState([])
+export interface Subtask {
+  subtask_id: number;
+  subtask_name: string;
+  ritual_name: string;
+  ritual_id: number;
+  subtask_state: number;
+  subtask_priority: number;
+  subtask_startdate: string;
+  subtask_deadline: string;
+}
 
-  useEffect(() => {
-    axios.get('http://localhost:3000/fetch_subtasks')
-    .then((res) => {
-        setData(res.data)
-        console.log("FETCHED")
-        console.log(data)
-    })
-    .catch((err) => console.log(err))
-  }, [])
+export interface Table_Props {
+  data: Subtask[];
+  refresh: boolean;
+  setRefresh: CallableFunction;
+}
 
+function getState(i: number) {
+  switch(i){
+    case 0: return "Backlog";
+    case 1: return "To Do";
+    case 2: return "In Progress"
+    case 3: return "Done";
+    case 4: return "Cancelled";
+    case 5: return "On Hold";
+  }
+}
+
+function getPriority(i: number){
+  switch(i){
+    case 0: return "None";
+    case 1: return "Low";
+    case 2: return "Medium";
+    case 3: return "High";
+    case 4: return "Urgent";
+  }
+}
+
+function Table(props: Table_Props) {
+  const data = props.data;
   return (
     <table className="table table-striped table-dark">
       <thead>
@@ -30,12 +57,12 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        {data.map((subtask) => (
+        {data.map((subtask: Subtask) => (
           <tr key = {subtask.subtask_id}>
             <td>{subtask.subtask_name}</td>
             <td>{subtask.ritual_name}</td>
-            <td>{subtask.subtask_state}</td>
-            <td>{subtask.subtask_priority}</td>
+            <td>{getState(subtask.subtask_priority)}</td>
+            <td>{getPriority(subtask.subtask_priority)}</td>
             <td>{subtask.subtask_startdate}</td>
             <td>{subtask.subtask_deadline}</td>
             <td>
