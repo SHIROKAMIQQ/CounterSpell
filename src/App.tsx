@@ -1,10 +1,6 @@
-import React from 'react'
-//import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css'
-
-import Navbar from "./components/Navbar.tsx";
-import Sidebar from "./components/Sidebar.tsx";
-import Table from "./components/Table.tsx";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+import Table from "./components/Table";
 
 function App() {
   let heading = ["Subtask", "Ritual", "Priority", "State", "Start", "Due"];
