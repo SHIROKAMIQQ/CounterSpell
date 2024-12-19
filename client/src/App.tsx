@@ -31,7 +31,7 @@ function App() {
               <Navbar />
               <div className="container-fluid">
                 <div className="row flex-nowrap">
-                  <div className="col-auto shadow">
+                  <div className="col-auto bg-body-secondary shadow">
                     <Sidebar refresh={refresh} setRefresh={setRefresh} />
                   </div>
                   <div className="col py-3">
