@@ -39,7 +39,7 @@ function Create(props: Props) {
               Subtask Name:
             </label>
             <input
-              className="col"
+              className="col form-control"
               type="text"
               name="subtask_name"
               onChange={(e) =>
@@ -54,7 +54,7 @@ function Create(props: Props) {
               Ritual Name:
             </label>
             <input
-              className="col"
+              className="col form-control"
               type="text"
               name="ritual_name"
               onChange={(e) =>
@@ -69,7 +69,7 @@ function Create(props: Props) {
               Start:
             </label>
             <input
-              className="col"
+              className="col form-control"
               type="text"
               id="subtask_startdate"
               name="subtask_startdate"
@@ -85,7 +85,7 @@ function Create(props: Props) {
               Deadline:
             </label>
             <input
-              className="col"
+              className="col form-control"
               type="text"
               id="subtask_deadline"
               name="subtask_deadline"
