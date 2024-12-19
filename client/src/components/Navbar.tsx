@@ -1,11 +1,10 @@
+import logo from "../assets/logo.png";
 const Navbar = () => {
   return (
-    <nav className="navbar sticky-top bg-dark border-bottom">
-      <div className="container-fluid d-flex justify-content-center">
-        <a className="navbar-brand text-light" href="#">
-          CounterSpell
-        </a>
-      </div>
+    <nav className="navbar sticky-top z-2 bg-dark-subtle container-fluid justify-content-center">
+      <header className="d-flex justify-content-center py-2">
+        <img src={logo} width={340} height={63} />
+      </header>
     </nav>
   );
 };

@@ -25,7 +25,7 @@ function Create(props) {
   }
 
   return props.trigger ? (
-    <div className="create_popup container">
+    <div className="create_popup container z-3">
       <div className="create_popup_inner row">
         <h3>Create New Subtask</h3>
         <form onSubmit={handleSubmit}>
