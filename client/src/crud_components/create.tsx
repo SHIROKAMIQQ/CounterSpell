@@ -34,31 +34,42 @@ function Create(props: Props) {
       <div className="create_popup_inner row">
         <h3>Create New Subtask</h3>
         <form onSubmit={handleSubmit}>
-          <div className="form-group my-3">
-            <label htmlFor="subtask_name">Subtask Name</label>
+          <div className="row my-2">
+            <label className="col-3 fw-bold" htmlFor="subtask_name">
+              Subtask Name:
+            </label>
             <input
+              className="col"
               type="text"
               name="subtask_name"
               onChange={(e) =>
                 setValues({ ...values, subtask_name: e.target.value })
               }
               required
+              placeholder="eg. Collect 5 Knackleberries"
             />
           </div>
-          <div className="form-group my-3">
-            <label htmlFor="ritual_name">Ritual Name</label>
+          <div className="row my-2">
+            <label className="col-3 fw-bold" htmlFor="ritual_name">
+              Ritual Name:
+            </label>
             <input
+              className="col"
               type="text"
               name="ritual_name"
               onChange={(e) =>
                 setValues({ ...values, ritual_name: e.target.value })
               }
               required
+              placeholder="eg. Summon Walpurgisnacht"
             />
           </div>
-          <div className="form-group my-3">
-            <label htmlFor="subtask_startdate">Start</label>
+          <div className="row my-2">
+            <label className="col-3 fw-bold" htmlFor="subtask_startdate">
+              Start:
+            </label>
             <input
+              className="col"
               type="text"
               id="subtask_startdate"
               name="subtask_startdate"
@@ -66,11 +77,15 @@ function Create(props: Props) {
                 setValues({ ...values, subtask_startdate: e.target.value })
               }
               required
+              placeholder="eg. On the 13th Witching Hour"
             />
           </div>
-          <div className="form-group my-3">
-            <label htmlFor="subtask_deadline">Deadline</label>
+          <div className="row my-2">
+            <label className="col-3 fw-bold" htmlFor="subtask_deadline">
+              Deadline:
+            </label>
             <input
+              className="col"
               type="text"
               id="subtask_deadline"
               name="subtask_deadline"
@@ -78,10 +93,11 @@ function Create(props: Props) {
                 setValues({ ...values, subtask_deadline: e.target.value })
               }
               required
+              placeholder="eg. Before the Last Sundrop"
             />
           </div>
-          <div className="form-group my-3">
-            <label>State</label>
+          <div className="form-group my-1">
+            <label className="fw-bold px-0">State</label>
             <br />
             <input
               type="radio"
@@ -150,8 +166,8 @@ function Create(props: Props) {
             />
             <label htmlFor="onhold_radio">On Hold</label>
           </div>
-          <div className="form-group my-3">
-            <label>Priority</label>
+          <div className="form-group my-2">
+            <label className="fw-bold px-0">Priority</label>
             <br />
             <input
               type="radio"
@@ -211,7 +227,7 @@ function Create(props: Props) {
           </div>
           <div className="form-group my-3">
             <button
-              className="close-btn"
+              className="close-btn btn btn-danger"
               onClick={() => props.setTrigger(false)}
             >
               Close
