@@ -9,17 +9,22 @@ import Table from "./components/Table";
 function App() {
   const [refresh, setRefresh] = useState(true);
   const [data, setData] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/fetch_subtasks")
+      .get("http://localhost:3000/fetch_subtasks",{
+        params: {
+          searchInput: searchInput
+        }
+      })
       .then((res) => {
         setData(res.data);
         console.log("FETCHED");
         //console.log(data)
       })
       .catch((err) => console.log(err));
-  }, [refresh]);
+  }, [refresh, searchInput]);
 
   return (
     <BrowserRouter>
@@ -32,7 +37,12 @@ function App() {
               <div className="container-fluid">
                 <div className="row flex-nowrap">
                   <div className="col-auto bg-body-secondary shadow">
-                    <Sidebar refresh={refresh} setRefresh={setRefresh} />
+                    <Sidebar 
+                      refresh={refresh} 
+                      setRefresh={setRefresh} 
+                      searchInput={searchInput}
+                      setSearchInput={setSearchInput}
+                    />
                   </div>
                   <div className="col py-3">
                     <Table
