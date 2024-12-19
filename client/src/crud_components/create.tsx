@@ -21,7 +21,8 @@ function Create(props: Props) {
   function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
     props.setTrigger(false);
-    axios.post("http://localhost:3000/add_subtask", values)
+    axios
+      .post("http://localhost:3000/add_subtask", values)
       .then((res) => {
         console.log(res);
       })
@@ -29,7 +30,7 @@ function Create(props: Props) {
   }
 
   return props.trigger ? (
-    <div className="create_popup container z-3">
+    <div className="create_popup container-fluid z-3">
       <div className="create_popup_inner row">
         <h3>Create New Subtask</h3>
         <form onSubmit={handleSubmit}>

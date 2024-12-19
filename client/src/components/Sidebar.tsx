@@ -21,13 +21,21 @@ function Sidebar(props: Sidebar_Props) {
       <hr className="my-0" />
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item p-3">Search</li>
-        <button
-          id="add_subtask_btn"
-          onClick={() => set_popup(true)}
-          className="btn btn-secondary"
-        >
-          ADD SUBTASK
-        </button>
+        <li className="nav-item py-1">
+          <button
+            id="add_subtask_btn"
+            onClick={() => set_popup(true)}
+            className="btn btn-warning"
+          >
+            ADD SUBTASK
+          </button>
+        </li>
+        <li className="nav-item py-1">
+          <button className="btn btn-secondary">Task View</button>
+        </li>
+        <li className="nav-item py-1">
+          <button className="btn btn-secondary">Ritual View</button>
+        </li>
         <Create trigger={add_subtask_popup} setTrigger={set_popup} />
       </ul>
     </div>
