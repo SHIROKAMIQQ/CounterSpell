@@ -34,7 +34,7 @@ app.post('/add_subtask', (req, res) => {
                 if (add_subtask_err) {
                     console.log(add_subtask_err);
                 } else {
-                    console.log(add_subtask_res);
+                    //console.log(add_subtask_res);
                 }
             });
         } else {
@@ -50,7 +50,7 @@ app.post('/add_subtask', (req, res) => {
                     if (add_subtask_err) {
                         console.log(add_subtask_err);
                     } else {
-                        console.log(add_subtask_res);
+                        //console.log(add_subtask_res);
                     }
                 });
             });
@@ -66,7 +66,7 @@ app.get('/fetch_subtasks', (req, res) => {
             console.log("Error fetching subtasks " + fetch_err);
             return res.json({message: "Error fetching subtasks"});
         }
-        console.log(fetch_res);
+        //console.log(fetch_res);
         return res.json(fetch_res);
     });
 });

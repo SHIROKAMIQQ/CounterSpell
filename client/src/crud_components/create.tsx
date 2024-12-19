@@ -3,7 +3,12 @@ import axios from "axios";
 
 import "./create.css";
 
-function Create(props) {
+interface Props {
+  trigger: boolean;
+  setTrigger: CallableFunction;
+}
+
+function Create(props: Props) {
   const [values, setValues] = useState({
     subtask_name: "",
     ritual_name: "",
@@ -13,11 +18,10 @@ function Create(props) {
     subtask_deadline: "",
   });
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
     props.setTrigger(false);
-    axios
-      .post("http://localhost:3000/add_subtask", values)
+    axios.post("http://localhost:3000/add_subtask", values)
       .then((res) => {
         console.log(res);
       })
@@ -37,6 +41,7 @@ function Create(props) {
               onChange={(e) =>
                 setValues({ ...values, subtask_name: e.target.value })
               }
+              required
             />
           </div>
           <div className="form-group my-3">
@@ -47,6 +52,7 @@ function Create(props) {
               onChange={(e) =>
                 setValues({ ...values, ritual_name: e.target.value })
               }
+              required
             />
           </div>
           <div className="form-group my-3">
@@ -58,6 +64,7 @@ function Create(props) {
               onChange={(e) =>
                 setValues({ ...values, subtask_startdate: e.target.value })
               }
+              required
             />
           </div>
           <div className="form-group my-3">
@@ -69,6 +76,7 @@ function Create(props) {
               onChange={(e) =>
                 setValues({ ...values, subtask_deadline: e.target.value })
               }
+              required
             />
           </div>
           <div className="form-group my-3">
@@ -82,6 +90,7 @@ function Create(props) {
               onChange={(e) =>
                 setValues({ ...values, subtask_state: e.target.value })
               }
+              required
             />
             <label htmlFor="backlog_radio">Backlog</label>
             <input
@@ -92,6 +101,7 @@ function Create(props) {
               onChange={(e) =>
                 setValues({ ...values, subtask_state: e.target.value })
               }
+              required
             />
             <label htmlFor="todo_radio">To Do </label>
             <input
@@ -102,10 +112,9 @@ function Create(props) {
               onChange={(e) =>
                 setValues({ ...values, subtask_state: e.target.value })
               }
+              required
             />
-            <label htmlFor="inprogress_radio" name="subtask_state" value="3">
-              In Progress
-            </label>
+            <label htmlFor="inprogress_radio">In Progress</label>
             <input
               type="radio"
               id="done_radio"
@@ -114,6 +123,7 @@ function Create(props) {
               onChange={(e) =>
                 setValues({ ...values, subtask_state: e.target.value })
               }
+              required
             />
             <label htmlFor="done_radio">Done</label>
             <input
@@ -124,6 +134,7 @@ function Create(props) {
               onChange={(e) =>
                 setValues({ ...values, subtask_state: e.target.value })
               }
+              required
             />
             <label htmlFor="cancelled_radio">Cancelled</label>
             <input
@@ -134,6 +145,7 @@ function Create(props) {
               onChange={(e) =>
                 setValues({ ...values, subtask_state: e.target.value })
               }
+              required
             />
             <label htmlFor="onhold_radio">On Hold</label>
           </div>
@@ -148,6 +160,7 @@ function Create(props) {
               onChange={(e) =>
                 setValues({ ...values, subtask_priority: e.target.value })
               }
+              required
             />
             <label htmlFor="none_radio">None</label>
             <input
@@ -158,6 +171,7 @@ function Create(props) {
               onChange={(e) =>
                 setValues({ ...values, subtask_priority: e.target.value })
               }
+              required
             />
             <label htmlFor="low_radio">Low</label>
             <input
@@ -168,6 +182,7 @@ function Create(props) {
               onChange={(e) =>
                 setValues({ ...values, subtask_priority: e.target.value })
               }
+              required
             />
             <label htmlFor="medium_radio">Medium</label>
             <input
@@ -178,6 +193,7 @@ function Create(props) {
               onChange={(e) =>
                 setValues({ ...values, subtask_priority: e.target.value })
               }
+              required
             />
             <label htmlFor="high_radio">High</label>
             <input
@@ -188,6 +204,7 @@ function Create(props) {
               onChange={(e) =>
                 setValues({ ...values, subtask_priority: e.target.value })
               }
+              required
             />
             <label htmlFor="urgent_radio">Urgent</label>
           </div>
