@@ -21,7 +21,7 @@ function App() {
   const [medium_checked, setMediumChecked] = useState(false);
   const [high_checked, setHighChecked] = useState(false);
   const [urgent_checked, setUrgentChecked] = useState(false);
-  const [rituals_checked, setRitualsChecked] = useState([]);
+  const [rituals_checked, setRitualsChecked] = useState([-1]);
 
   useEffect(() => {
     axios

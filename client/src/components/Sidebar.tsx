@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from 'axios';
 
 import Create from "../crud_components/create";
 
@@ -33,14 +34,46 @@ export interface Sidebar_Props {
   setRitualsChecked: CallableFunction;
 }
 
+interface Ritual {
+  ritual_id: number;
+  ritual_name: string;
+}
+
+function find_element(e: number, arr: number[]){
+  const found = arr.find((a) => a == e);
+  if (found === undefined) return false;
+  return true;
+}
+
+function add_element(e: number, arr: number[]) {
+  const ret = arr;
+  ret.push(e);
+  return ret;
+}
+
+function remove_element(e: number, arr: number[]) {
+  return arr.filter((a) => a != e);
+}
+
 function Sidebar(props: Sidebar_Props) {
   const [add_subtask_popup, set_popup] = useState(false);
   const [selectedItem, setSelectedItem] = useState(1);
+  const [rituals, setRituals] = useState([]);
+  const [ritual_click, setRitualClick] = useState(false);
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/fetch_rituals")
+    .then((res) => {
+      setRituals(res.data);
+      console.log("FETCHED RITUALS");
+    })
+    .catch((err) => console.log(err));
+  }, [props.refresh]); 
 
   useEffect(() => {
     props.setRefresh(!props.refresh);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [add_subtask_popup, props.searchInput]);
+  }, [add_subtask_popup, props.searchInput, ritual_click]);
 
   return (
     <div className="d-flex flex-column px-2 pt-2 text-white min-vh-100">
@@ -260,6 +293,37 @@ function Sidebar(props: Sidebar_Props) {
                 Urgent
               </label>
             </li>
+          </ul>
+        </div>
+        <div className="ps-3 mt-2">
+          <h5 className="py-0 mb-0">Rituals</h5>
+          <ul className="list-group flex-column border mt-1">
+            {rituals.map((ritual: Ritual) => (
+              <li className="list-group-item bg-body-secondary py-0">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  name={ritual.ritual_name + "_checkbox"}
+                  id={ritual.ritual_name + "_checkbox"}
+                  checked={find_element(ritual.ritual_id, props.rituals_checked)}
+                  onChange={() => {
+                    console.log(ritual.ritual_name, find_element(ritual.ritual_id, props.rituals_checked));
+                    if (find_element(ritual.ritual_id, props.rituals_checked)) {
+                      props.setRitualsChecked(remove_element(ritual.ritual_id, props.rituals_checked));
+                      console.log("REMOVED" + ritual.ritual_id);
+                    } else {
+                      props.setRitualsChecked(add_element(ritual.ritual_id, props.rituals_checked));
+                      console.log("ADDED" + ritual.ritual_id);
+                    }
+                    setRitualClick(!ritual_click)
+                    console.log(props.rituals_checked);
+                  }}
+                />
+                <label className="form-check-label py-0" htmlFor={ritual.ritual_name + "_checkbox"}>
+                  {ritual.ritual_name}
+                </label>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
