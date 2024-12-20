@@ -154,6 +154,58 @@ function Sidebar(props: Sidebar_Props) {
         </div>
         <div className="checkbox-priorities">
           <h4 className="py-0 mb-0">Priorities</h4>
+          <ul className="nav flex-column">
+            <li className="py-0">
+              <input 
+                type="checkbox"
+                name="none_checkbox"
+                id="none_checkbox"
+                checked={props.none_checked}
+                onChange={() => props.setNoneChecked(!props.none_checked)}
+              />
+              <label className="py-0" htmlFor="none_checkbox">None</label>
+            </li>
+            <li className="py-0">
+              <input 
+                type="checkbox"
+                name="low_checkbox"
+                id="low_checkbox"
+                checked={props.low_checked}
+                onChange={() => props.setLowChecked(!props.low_checked)}
+              />
+              <label className="py-0" htmlFor="low_checkbox">Low</label>
+            </li>
+            <li className="py-0">
+              <input 
+                type="checkbox"
+                name="medium_checkbox"
+                id="medium_checkbox"
+                checked={props.medium_checked}
+                onChange={() => props.setMediumChecked(!props.medium_checked)}
+              />
+              <label className="py-0" htmlFor="medium_checkbox">Medium</label>
+            </li>
+            <li className="py-0">
+              <input 
+                type="checkbox"
+                name="high_checkbox"
+                id="high_checkbox"
+                checked={props.high_checked}
+                onChange={() => props.setHighChecked(!props.high_checked)}
+              />
+              <label className="py-0" htmlFor="high_checkbox">High</label>
+            </li>
+            <li className="py-0">
+              <input 
+                type="checkbox"
+                name="urgent_checkbox"
+                id="urgent_checkbox"
+                checked={props.urgent_checked}
+                onChange={() => props.setUrgentChecked(!props.urgent_checked)}
+              />
+              <label className="py-0" htmlFor="urgent_checkbox">Urgent</label>
+            </li>
+          </ul>
         </div>
       </div>
       <Create trigger={add_subtask_popup} setTrigger={set_popup} />
