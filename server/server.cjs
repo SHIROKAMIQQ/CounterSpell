@@ -72,6 +72,31 @@ app.get('/fetch_subtasks', (req, res) => {
     });
 });
 
+app.get('/fetch_singlesubtask', (req, res) => {
+    const fetch_subtask_query = "SELECT subtask_name, ritual_name, subtask_state, subtask_priority, subtask_startdate, subtask_deadline FROM subtasks_table WHERE subtask_id = ? LIMIT 1"
+    db.query(fetch_subtask_query, [req.query.subtask_id], (fetch_err, fetch_res) => {
+        if (fetch_err) {
+            console.log("Error fetching subtasks " + fetch_err);
+            return res.json({message: "Error fetching single subtask"});
+        }
+        console.log("SINGLE FETCH" + req.query.subtask_id);
+        return res.json(fetch_res);
+    });
+});
+
+app.put('/edit_subtask', (req, res) => {
+    const update_subtask_query = "UPDATE subtasks_table SET `subtask_name` = ?, `ritual_name` = ?, `subtask_state` = ?, `subtask_priority` = ?, `subtask_startdate` = ?, `subtask_deadline` = ? WHERE subtask_id = ? LIMIT 1";
+    const values = [req.body[0].subtask_name, req.body[0].ritual_name, req.body[0].subtask_state, req.body[0].subtask_priority, req.body[0].subtask_startdate, req.body[0].subtask_deadline, req.query.subtask_id];
+    db.query(update_subtask_query, values, (update_err, update_res) => {
+        if (update_err) {
+            console.log("Error updating subtask " + update_err);
+            return res.json({message: "Error updating subtask"});
+        }
+        console.log("UPDATE " + req.query.subtask_id);
+        return res.json(update_res);
+    })
+});
+
 app.listen(port, ()=>{
     console.log('listening')
 })
