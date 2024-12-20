@@ -1,5 +1,5 @@
-//import axios from 'axios'
-import {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react';
+import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as Icon from "react-bootstrap-icons";
 
@@ -64,6 +64,20 @@ function Table(props: Table_Props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [edit_popup]);
 
+  function handle_delete(subtask_id: number) {
+    axios.delete("http://localhost:3000/delete_subtask", {
+      params: {
+        subtask_id: subtask_id
+      }
+    })
+    .then((res) => {
+      console.log(res);
+      console.log("DELETE");
+      props.setRefresh(!props.refresh);
+    })
+    .catch((err) => console.log(err));
+  }
+
   return (
     <table className="table table-striped table-dark">
       <thead>
@@ -104,6 +118,7 @@ function Table(props: Table_Props) {
                 name="delete_btn"
                 title="Delete"
                 className="btn btn-outline-danger"
+                onClick={() => handle_delete(subtask.subtask_id)}
               >
                 <Icon.XDiamondFill />
               </button>

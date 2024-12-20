@@ -97,6 +97,18 @@ app.put('/edit_subtask', (req, res) => {
     })
 });
 
+app.delete('/delete_subtask', (req, res) => {
+    const delete_subtask_query = "DELETE FROM subtasks_table WHERE subtask_id = ? LIMIT 1";
+    db.query(delete_subtask_query, [req.query.subtask_id], (delete_err, delete_res) => {
+        if (delete_err) {
+            console.log("Error deleting subtask " + delete_err);
+            return res.json({message: "Error deleting subtask"});
+        }
+        console.log("DELETE " + req.query.subtask_id);
+        return res.json(delete_res);
+    });
+});
+
 app.listen(port, ()=>{
     console.log('listening')
 })
