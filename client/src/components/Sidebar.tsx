@@ -16,12 +16,8 @@ function Sidebar(props: Sidebar_Props) {
 
   useEffect(() => {
     props.setRefresh(!props.refresh);
-  }, [props.searchInput]);
-
-  useEffect(() => {
-    props.setRefresh(!props.refresh);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [add_subtask_popup]);
+  }, [add_subtask_popup, props.searchInput]);
 
   return (
     <div className="d-flex flex-column px-3 pt-2 text-white min-vh-100">

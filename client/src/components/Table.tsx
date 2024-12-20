@@ -1,7 +1,9 @@
 //import axios from 'axios'
-//import {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as Icon from "react-bootstrap-icons";
+
+import Edit from "../crud_components/edit";
 
 export interface Subtask {
   subtask_id: number;
@@ -54,6 +56,14 @@ function getPriority(i: number) {
 
 function Table(props: Table_Props) {
   const data = props.data;
+  const [edit_popup, set_edit_popup] = useState(false);
+  const [update_id, set_update_id] = useState(0);
+
+  useEffect(() => {
+    if (!edit_popup) props.setRefresh(!props.refresh);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [edit_popup]);
+
   return (
     <table className="table table-striped table-dark">
       <thead>
@@ -78,12 +88,18 @@ function Table(props: Table_Props) {
             <td>{subtask.subtask_deadline}</td>
             <td>
               <button
+                id = "edit_subtask_btn"
                 name="edit_btn"
                 title=" Edit"
                 className="btn btn-outline-warning"
+                onClick={() => {
+                  set_edit_popup(true);
+                  set_update_id(subtask.subtask_id);
+                }}
               >
                 <Icon.Shadows />
               </button>
+              <Edit trigger={edit_popup} setTrigger={set_edit_popup} update_id={update_id} subtask_id={subtask.subtask_id} set_update_id={set_update_id} />
               <button
                 name="delete_btn"
                 title="Delete"
