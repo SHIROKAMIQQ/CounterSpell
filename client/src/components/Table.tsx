@@ -58,10 +58,9 @@ function Table(props: Table_Props) {
   const data = props.data;
   const [edit_popup, set_edit_popup] = useState(false);
   const [update_id, set_update_id] = useState(0);
-
   useEffect(() => {
     if (!edit_popup) props.setRefresh(!props.refresh);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [edit_popup]);
 
   function handle_delete(subtask_id: number) {
@@ -88,24 +87,26 @@ function Table(props: Table_Props) {
           <th scope="col">Priority</th>
           <th scope="col">Start</th>
           <th scope="col">Deadline</th>
-          <th scope="col"> </th>
+          <th scope="col" style={{ width: 100 }}>
+            {" "}
+          </th>
         </tr>
       </thead>
       <tbody>
         {data.map((subtask: Subtask) => (
-          <tr key={subtask.subtask_id}>
+          <tr key={subtask.subtask_id} className="align-middle">
             <td>{subtask.subtask_name}</td>
             <td>{subtask.ritual_name}</td>
             <td>{getState(subtask.subtask_priority)}</td>
             <td>{getPriority(subtask.subtask_priority)}</td>
             <td>{subtask.subtask_startdate}</td>
             <td>{subtask.subtask_deadline}</td>
-            <td>
+            <td className="d-flex justify-content-center">
               <button
-                id = "edit_subtask_btn"
+                id="edit_subtask_btn"
                 name="edit_btn"
                 title=" Edit"
-                className="btn btn-outline-warning"
+                className="btn btn-outline-warning me-1"
                 onClick={() => {
                   set_edit_popup(true);
                   set_update_id(subtask.subtask_id);
@@ -113,11 +114,17 @@ function Table(props: Table_Props) {
               >
                 <Icon.Shadows />
               </button>
-              <Edit trigger={edit_popup} setTrigger={set_edit_popup} update_id={update_id} subtask_id={subtask.subtask_id} set_update_id={set_update_id} />
+              <Edit
+                trigger={edit_popup}
+                setTrigger={set_edit_popup}
+                update_id={update_id}
+                subtask_id={subtask.subtask_id}
+                set_update_id={set_update_id}
+              />
               <button
                 name="delete_btn"
                 title="Delete"
-                className="btn btn-outline-danger"
+                className="btn btn-outline-danger me-0"
                 onClick={() => handle_delete(subtask.subtask_id)}
               >
                 <Icon.XDiamondFill />
