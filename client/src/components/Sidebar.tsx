@@ -25,7 +25,7 @@ function Sidebar(props: Sidebar_Props) {
       <hr className="my-2" />
       <input
         className="form-control"
-        placeholder="Search subtask"
+        placeholder="Search Subtask..."
         value={props.searchInput}
         onChange={(e) => props.setSearchInput(e.target.value)}
       />
@@ -57,7 +57,7 @@ function Sidebar(props: Sidebar_Props) {
       <button
         id="add_subtask_btn"
         onClick={() => set_popup(true)}
-        className="btn btn-warning my-1"
+        className="btn btn-secondary my-1"
       >
         ADD SUBTASK
       </button>
