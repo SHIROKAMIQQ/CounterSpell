@@ -90,11 +90,23 @@ function parse_priorities(none, low, medium, high, urgent) {
     }
 }
 
+function add_element(e, arr) {
+    const ret = arr;
+    ret.push(e);
+    return ret;
+}
+
 app.get('/fetch_subtasks', (req, res) => {
     var fetch_subtasks_query = "SELECT subtask_id, subtask_name, ritual_name, subtask_state, subtask_priority, subtask_startdate, subtask_deadline FROM subtasks_table WHERE subtask_name LIKE ? AND subtask_state IN (?) AND subtask_priority IN (?)";
     let states = parse_states(req.query.backlog_checked, req.query.todo_checked, req.query.inprogress_checked, req.query.done_checked, req.query.cancelled_checked, req.query.onhold_checked);
     let priorities = parse_priorities(req.query.none_checked, req.query.low_checked, req.query.medium_checked, req.query.high_checked, req.query.urgent_checked);
     let wildcards = ["%"+req.query.searchInput+"%", states, priorities];
+
+    if (req.query.rituals_checked.length > 1) {
+        fetch_subtasks_query += " AND ritual_id IN (?)";
+        wildcards = add_element(req.query.rituals_checked, wildcards);
+    }
+
     db.query(fetch_subtasks_query, wildcards, (fetch_err, fetch_res) => {
         if (fetch_err) {
             console.log("Error fetching subtasks " + fetch_err);
@@ -142,6 +154,18 @@ app.delete('/delete_subtask', (req, res) => {
         console.log("DELETE " + req.query.subtask_id);
         return res.json(delete_res);
     });
+});
+
+app.get('/fetch_rituals', (req, res) => {
+    const fetch_rituals_query = "SELECT * FROM rituals_table";
+    db.query(fetch_rituals_query, (fetch_err, fetch_res) => {
+        if (fetch_err) {
+            console.log("Error fetching rituals: " + fetch_err);
+            return res.json({message: "Error fetching rituals"});
+        }
+        console.log("FETCH RITUALS");
+        return res.json(fetch_res);
+    })
 });
 
 app.listen(port, ()=>{
