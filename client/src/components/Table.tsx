@@ -55,21 +55,9 @@ function getPriority(i: number) {
 }
 
 function Table(props: Table_Props) {
-  //fix this
-  let data = props.data;
+  const data = props.data;
   const [edit_popup, set_edit_popup] = useState(false);
   const [update_id, set_update_id] = useState(0);
-  data.push({
-    subtask_id: 1,
-    subtask_name: "Test",
-    subtask_deadline: "test",
-    subtask_priority: 1,
-    subtask_startdate: "test",
-    subtask_state: 1,
-    ritual_id: 0,
-    ritual_name: "Test",
-  });
-
   useEffect(() => {
     if (!edit_popup) props.setRefresh(!props.refresh);
     // eslint-disable-next-line react-hooks/exhaustive-deps
