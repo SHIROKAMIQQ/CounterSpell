@@ -12,6 +12,7 @@ export interface Sidebar_Props {
 
 function Sidebar(props: Sidebar_Props) {
   const [add_subtask_popup, set_popup] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(1);
 
   useEffect(() => {
     props.setRefresh(!props.refresh);
@@ -19,8 +20,8 @@ function Sidebar(props: Sidebar_Props) {
   }, [add_subtask_popup, props.searchInput]);
 
   return (
-    <div className="d-flex flex-column px-3 pt-2 text-white min-vh-100">
-      <h3 className="py-0">Tools</h3>
+    <div className="d-flex flex-column px-2 pt-2 text-white min-vh-100">
+      <h3 className="py-0 mb-0">Tools</h3>
       <hr className="my-2" />
       <input
         className="form-control"
@@ -30,12 +31,24 @@ function Sidebar(props: Sidebar_Props) {
       />
       <ul className="nav nav-pills flex-column">
         <li className="nav-item py-1">
-          <a href="#" className="nav-link active">
+          <a
+            href="#"
+            className={selectedItem === 1 ? "nav-link active" : "nav-link"}
+            onClick={() => {
+              setSelectedItem(1);
+            }}
+          >
             View All Tasks
           </a>
         </li>
         <li className="nav-item py-1">
-          <a href="#" className="nav-link">
+          <a
+            href="#"
+            className={selectedItem === 2 ? "nav-link active" : "nav-link "}
+            onClick={() => {
+              setSelectedItem(2);
+            }}
+          >
             View By Ritual
           </a>
         </li>
@@ -44,7 +57,7 @@ function Sidebar(props: Sidebar_Props) {
       <button
         id="add_subtask_btn"
         onClick={() => set_popup(true)}
-        className="btn btn-warning"
+        className="btn btn-warning my-1"
       >
         ADD SUBTASK
       </button>
