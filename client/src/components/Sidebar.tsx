@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import * as Icon from "react-bootstrap-icons";
 
-
 import Create from "../crud_components/create";
 
 export interface Sidebar_Props {
@@ -21,34 +20,35 @@ function Sidebar(props: Sidebar_Props) {
 
   return (
     <div className="d-flex flex-column px-3 pt-2 text-white min-vh-100">
-      <h2 className="py-2">Tools</h2>
-      <hr className="my-0" />
-      <ul className="nav nav-pills flex-column mb-auto">
-        <li className="nav-item p-3">
-          <Icon.Search />
-          <input 
-            placeholder = "Search subtask"
-            value = {props.searchInput}
-            onChange = {(e) => props.setSearchInput(e.target.value)}
-          />
+      <h3 className="py-0">Tools</h3>
+      <hr className="my-2" />
+      <input
+        className="form-control"
+        placeholder="Search subtask"
+        value={props.searchInput}
+        onChange={(e) => props.setSearchInput(e.target.value)}
+      />
+      <ul className="nav nav-pills flex-column">
+        <li className="nav-item py-1">
+          <a href="#" className="nav-link active">
+            View All Tasks
+          </a>
         </li>
         <li className="nav-item py-1">
-          <button
-            id="add_subtask_btn"
-            onClick={() => set_popup(true)}
-            className="btn btn-warning"
-          >
-            ADD SUBTASK
-          </button>
+          <a href="#" className="nav-link">
+            View By Ritual
+          </a>
         </li>
-        <li className="nav-item py-1">
-          <button className="btn btn-secondary">Task View</button>
-        </li>
-        <li className="nav-item py-1">
-          <button className="btn btn-secondary">Ritual View</button>
-        </li>
-        <Create trigger={add_subtask_popup} setTrigger={set_popup} />
       </ul>
+      <hr className="my-2" />
+      <button
+        id="add_subtask_btn"
+        onClick={() => set_popup(true)}
+        className="btn btn-warning"
+      >
+        ADD SUBTASK
+      </button>
+      <Create trigger={add_subtask_popup} setTrigger={set_popup} />
     </div>
   );
 }
