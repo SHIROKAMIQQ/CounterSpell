@@ -97,7 +97,7 @@ function Table(props: Table_Props) {
           <tr key={subtask.subtask_id} className="align-middle">
             <td>{subtask.subtask_name}</td>
             <td>{subtask.ritual_name}</td>
-            <td>{getState(subtask.subtask_priority)}</td>
+            <td>{getState(subtask.subtask_state)}</td>
             <td>{getPriority(subtask.subtask_priority)}</td>
             <td>{subtask.subtask_startdate}</td>
             <td>{subtask.subtask_deadline}</td>
