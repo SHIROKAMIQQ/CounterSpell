@@ -1,5 +1,5 @@
-import {useState, useEffect} from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as Icon from "react-bootstrap-icons";
 
@@ -64,17 +64,18 @@ function Table(props: Table_Props) {
   }, [edit_popup]);
 
   function handle_delete(subtask_id: number) {
-    axios.delete("http://localhost:3000/delete_subtask", {
-      params: {
-        subtask_id: subtask_id
-      }
-    })
-    .then((res) => {
-      console.log(res);
-      console.log("DELETE");
-      props.setRefresh(!props.refresh);
-    })
-    .catch((err) => console.log(err));
+    axios
+      .delete("http://localhost:3000/delete_subtask", {
+        params: {
+          subtask_id: subtask_id,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        console.log("DELETE");
+        props.setRefresh(!props.refresh);
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
